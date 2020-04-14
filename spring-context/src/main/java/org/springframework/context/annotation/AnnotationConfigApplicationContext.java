@@ -68,10 +68,15 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigApplicationContext() {
-		// 实例化reader，被注解修饰的bean描述读取器
+		// 实例化reader，被注解的<bean描述>读取器
+		/**
+		 * this : BeanDefinitionRegistry == ApplicationContext  当前spring环境
+		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
 
-		// 扫描，
+		/**
+		 * 扫描(只有显示调用.scan方法才会使用)，能够扫描类并且转化BD
+		 */
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 
@@ -92,10 +97,20 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * e.g. {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
-		// 先调用父类默认构造方法
+		/**
+		 * 先调用父类默认构造方法
+		 * 实例化BeanFactory
+		 * 实例化BDReader-->加载spring内部类到BDM
+		 */
 		this();
-		// annotatedClasses 传入的自定义配置类
+		/**
+		 * 读取外部配置类，将自定义类加载到BDM中
+		 */
 		register(annotatedClasses);
+
+		/**
+		 * 准备bean工厂、实例化对象
+		 */
 		refresh();
 	}
 
