@@ -12,6 +12,12 @@ public class Test {
 		context.refresh();
 		QueryDao queryDao = context.getBean(QueryDao.class);
 		queryDao.say();
+
+
+
+
 	}
+
+
 
 }
