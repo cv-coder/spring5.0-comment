@@ -1,5 +1,8 @@
 package com.cvcoder.test;
 
+import com.cvcoder.bean.Student;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * @program: spring
  * @description: IOC测试类
@@ -9,6 +12,10 @@ package com.cvcoder.test;
 public class IocTest {
 
 	public static void main(String[] args) {
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+		Student student = (Student)applicationContext.getBean("student");
+		student.say();
+
 	}
 
 
